@@ -29,7 +29,7 @@ public class CharacterAnimController : MonoBehaviour
 
     private void HandleStateChange(CharacterFSM.PlayerState newState)
     {
-        ResetAllParametrs();
+            ResetAllParametrs();
 
         switch (newState)
         {
@@ -38,6 +38,7 @@ public class CharacterAnimController : MonoBehaviour
                 break;
             case CharacterFSM.PlayerState.Moving:
                 _anim.SetBool(_moveParam, true);
+                Debug.Log("запуска анимации движения");
                 break;
             case CharacterFSM.PlayerState.Attacking:
                 _anim.SetTrigger(_attackParam);

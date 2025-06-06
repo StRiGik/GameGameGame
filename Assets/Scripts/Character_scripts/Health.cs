@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
     public void SetHealth(float health)
     {
         _currentHealth += health;
+        //Debug.Log("изменение здоровья произошло!");
         if(_currentHealth <= 0)
         {
             Debug.Log("абонент умер!");

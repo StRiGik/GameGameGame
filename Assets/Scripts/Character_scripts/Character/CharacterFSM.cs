@@ -4,17 +4,35 @@ using UnityEngine;
 public class CharacterFSM : MonoBehaviour
 {
     public enum PlayerState { Idle, Moving, Attacking }
-    public PlayerState CurrentState { get; private set; }
+    public PlayerState CurrentState { get; private set; } = PlayerState.Idle;
+    //Флаг принудительной атаки
+    private bool _forceAttacking = false;
 
-    public void OnMovementStarted() => TryChangeState(PlayerState.Moving);
-    public void OnMovementStoped() => TryChangeState(PlayerState.Idle);
-    public void OnAttackStarted() => TryChangeState(PlayerState.Attacking);
-    public void OnAttackStoped() => TryChangeState(PlayerState.Idle);
+    public void OnMovementStarted()
+    {
+        if(!_forceAttacking)
+            TryChangeState(PlayerState.Moving);
+    }
+    public void OnMovementStoped()
+    {
+        if(!_forceAttacking)
+            TryChangeState(PlayerState.Idle);
+    }
+    public void SetAttackState(bool shouldAttack)
+    {
+        _forceAttacking = shouldAttack;
+        if (shouldAttack)
+            TryChangeState(PlayerState.Attacking);
+        else if (CurrentState == PlayerState.Attacking)
+            TryChangeState(PlayerState.Idle);
+    }
 
     public event Action<PlayerState> OnStateChanged;
 
     private void TryChangeState(PlayerState newState)
     {
+        if (CurrentState == newState && newState != PlayerState.Attacking) return;
+        if (_forceAttacking && newState != PlayerState.Attacking) return;
         //Проверяем, можно ли перейти в новое состояние
         if (CanChangeState(newState))
         {
@@ -28,7 +46,9 @@ public class CharacterFSM : MonoBehaviour
 
     private bool CanChangeState(PlayerState newState)
     {
+ 
         if(newState == PlayerState.Idle && CurrentState == PlayerState.Attacking) { return false; }
+        
         return true;
     }
 

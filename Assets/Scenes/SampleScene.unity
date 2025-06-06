@@ -421,7 +421,7 @@ MonoBehaviour:
   _moveSpeed: 150
   _damage: 1
   _attackDistance: 1
-  _attackCooldown: 0.5
+  _attackCooldown: 1
 --- !u!114 &22744628
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ public class CharacterMovement : MonoBehaviour
     {
         _moveInput.x = Input.GetAxisRaw("Horizontal");
         _moveInput.y = Input.GetAxisRaw("Vertical");
-        if (_moveInput.x > 0 || _moveInput.y > 0 || _moveInput.x < 0 || _moveInput.y < 0)
+        if (_moveInput.x != 0 || _moveInput.y != 0)
         {
             _fsm.OnMovementStarted();
         }

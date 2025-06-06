@@ -8,7 +8,7 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] private CharacterFSM _fsm; 
 
     private float _damage;
-    private float _attackDistance;
+    private float _attackDistance = 1f;
     private float _attackCooldown;
     [SerializeField] private LayerMask _enemyLayer;
     private float _lastAttackTime;
@@ -31,11 +31,11 @@ public class CharacterAttack : MonoBehaviour
         Collider2D[] enemys = Physics2D.OverlapCircleAll(transform.position, _attackDistance, _enemyLayer);
         if (enemys.Length == 0)
         {
-            _fsm.OnAttackStoped();
+            _fsm.SetAttackState(enemys.Length > 0);
             return;
         }
 
-            Transform closestEnemy = null;
+        Transform closestEnemy = null;
         float minDistance = Mathf.Infinity;
 
         foreach (Collider2D enemyCollider in enemys)
@@ -51,7 +51,7 @@ public class CharacterAttack : MonoBehaviour
 
         if (closestEnemy != null)
         {
-            _fsm.OnAttackStarted();
+            _fsm.SetAttackState(enemys.Length > 0);
             closestEnemy.GetComponent<Health>().SetHealth(-_damage);
             _lastAttackTime = Time.time;
         }
