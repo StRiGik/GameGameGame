@@ -25,6 +25,11 @@ public class ManaSystem : MonoBehaviour
             _currentMana = Mathf.Min(_currentMana + _manaRegenRate * Time.deltaTime, _maxMana);
             UpdateManaBar();
         }
+        if (Input.GetKeyDown(KeyCode.Space) && _currentMana >= 3) 
+        {
+            _currentMana -= 3;
+            UpdateManaBar();
+        }
     }
 
     public bool TrySpendMana(int amount)
