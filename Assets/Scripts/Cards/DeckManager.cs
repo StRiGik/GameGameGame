@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeckManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class DeckManager : MonoBehaviour
 
     [Header("Настройки слотов карт")]
     [SerializeField] private List<CardSlotUI> _cardSlots;
+    [SerializeField] private Image _nextCardHindImage;
+    [SerializeField] private Text _nextCardHintManaCost;
 
     private Queue<Card> _cardQueue = new Queue<Card>();
     private List<Card> _currentHand = new List<Card>();
@@ -55,7 +58,9 @@ public class DeckManager : MonoBehaviour
                 _cardSlots[i].SetCard(card);
 
             }
+            UpdateNextCardHint();
         }
+
     }
 
     public void OnCardUsed(CardSlotUI usedSlot)
@@ -75,11 +80,16 @@ public class DeckManager : MonoBehaviour
             _currentHand.Insert(slotIndex, newCard);
             usedSlot.SetCard(newCard);
 
+            UpdateNextCardHint();
         }
-
-        
     }
 
+    private void UpdateNextCardHint()
+    {
+        Card card = _cardQueue.Peek();
+        _nextCardHindImage.sprite = card.Icon;
+        _nextCardHintManaCost.text = card.ElexirCost.ToString();
+    }
     // Для отладки
     public void PrintQueueStatus()
     {

@@ -11,6 +11,7 @@ public class CardSlotUI : MonoBehaviour
 
     [Header("Системы")]
     [SerializeField] private ManaSystem _manaSystem;
+    [SerializeField] private DeckManager _deckManager;
 
     private Card _currentCard;
     private int _manaCost;
@@ -35,7 +36,7 @@ public class CardSlotUI : MonoBehaviour
         Debug.Log($"Использована карта: {_currentCard.CardName}");
 
         // Уведомляем DeckManager
-        FindObjectOfType<DeckManager>().OnCardUsed(this);
+        _deckManager.OnCardUsed(this);
 
         // Здесь можно добавить эффекты применения карты
         if (targetCell != null && _currentCard.SpellPrefab != null)
