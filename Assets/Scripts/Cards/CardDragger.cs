@@ -79,10 +79,9 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(eventData.position);
         Cell targetCell = _gridManager.GetNearestCell(worldPos);
 
-        if (targetCell != null && _slot.ManaSystem.TrySpendMana(_slot.Mana))
+        if (targetCell != null && _slot.UseCard(targetCell) == true)
         {
             _slot.UseCard(targetCell); // Передаем клетку, куда сбросили
-            _deck.AddCardToSlot(_slot);
             _draggingObject.GetComponent<Image>().sprite = _slot.CardIcon.sprite;
         }
     }

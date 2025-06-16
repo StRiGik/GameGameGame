@@ -712,6 +712,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d40abbf93943d7f458770fa3c03b12f4, type: 2}
   - {fileID: 11400000, guid: b9662d4a76541014895195f2fc333b8d, type: 2}
   - {fileID: 11400000, guid: c11fcee95cf2f17448c5e9841c6af828, type: 2}
+  - {fileID: 11400000, guid: af05d906c9699b840b2a838f69a05cbf, type: 2}
+  - {fileID: 11400000, guid: ff75b6d0decdc324eb2ac3b540905c3b, type: 2}
+  - {fileID: 11400000, guid: da51eb61e4bf5da4099629d44cae9117, type: 2}
 --- !u!1 &98880855
 GameObject:
   m_ObjectHideFlags: 0
@@ -4614,7 +4617,7 @@ MonoBehaviour:
   _cardIcon: {fileID: 1899955064}
   _cardFrame: {fileID: 1640325179}
   _cardManaCost: {fileID: 1070204748}
-  _mana: {fileID: 22744632}
+  _manaSystem: {fileID: 22744632}
 --- !u!114 &240831265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4776,7 +4779,7 @@ MonoBehaviour:
   _cardIcon: {fileID: 1492341755}
   _cardFrame: {fileID: 1853915050}
   _cardManaCost: {fileID: 869847403}
-  _mana: {fileID: 22744632}
+  _manaSystem: {fileID: 22744632}
 --- !u!114 &455522445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5213,7 +5216,7 @@ MonoBehaviour:
   _cardIcon: {fileID: 615347049}
   _cardFrame: {fileID: 182549892}
   _cardManaCost: {fileID: 194236121}
-  _mana: {fileID: 22744632}
+  _manaSystem: {fileID: 22744632}
 --- !u!114 &521269124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6300,15 +6303,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loadPlayerDeck: {fileID: 22744633}
-  _selectedPlayerCards:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   _cardSlots:
   - {fileID: 1662352022}
   - {fileID: 240831264}
@@ -6918,7 +6912,7 @@ MonoBehaviour:
   _cardIcon: {fileID: 1122511177}
   _cardFrame: {fileID: 2061896278}
   _cardManaCost: {fileID: 1710133455}
-  _mana: {fileID: 22744632}
+  _manaSystem: {fileID: 22744632}
 --- !u!114 &1662352023
 MonoBehaviour:
   m_ObjectHideFlags: 0

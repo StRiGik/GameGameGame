@@ -1,35 +1,48 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class CardSlotUI : MonoBehaviour
 {
+    [Header("Визуальные элементы")]
     [SerializeField] private Image _cardIcon;
     [SerializeField] private Image _cardFrame;
     [SerializeField] private Text _cardManaCost;
-    [SerializeField] private ManaSystem _mana;
 
+    [Header("Системы")]
+    [SerializeField] private ManaSystem _manaSystem;
+
+    private Card _currentCard;
     private int _manaCost;
 
     public Image CardIcon => _cardIcon;
-    public int Mana => _manaCost;
-    public ManaSystem ManaSystem => _mana;
-    public void SetCard(Card _card)
+
+    public void SetCard(Card card)
     {
-        _cardIcon.sprite = _card.Icon;
-        _cardFrame.sprite = _card.Frame;
-        _cardManaCost.text = _card.ElexirCost.ToString();
-        _manaCost = _card.ElexirCost;
+        _currentCard = card;
+        _cardIcon.sprite = card.Icon;
+        _cardFrame.sprite = card.Frame;
+        _cardManaCost.text = card.ElexirCost.ToString();
+        _manaCost = card.ElexirCost;
+        _cardIcon.color = Color.white;
     }
 
-    public void UseCard(Cell targetCell)
+
+    public bool UseCard(Cell targetCell)
     {
-        Debug.Log($"Карта использована на клетке: {targetCell.name}");
+        if (!_manaSystem.TrySpendMana(_manaCost)) return false;
 
-        // Здесь можно:
-        // 1. Создать эффект/префаб заклинания на клетке
-        // 2. Запустить перезарядку
-        // 3. Уведомить DeckManager
+        Debug.Log($"Использована карта: {_currentCard.CardName}");
 
+        // Уведомляем DeckManager
+        FindObjectOfType<DeckManager>().OnCardUsed(this);
+
+        // Здесь можно добавить эффекты применения карты
+        if (targetCell != null && _currentCard.SpellPrefab != null)
+        {
+            Instantiate(_currentCard.SpellPrefab, targetCell.transform.position, Quaternion.identity);
+        }
+
+        return true;
     }
 }
