@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f7017d07414e44a92dd018f7c02433, type: 3}
   m_Name: Spell 2
   m_EditorClassIdentifier: 
-  _cardName: "\u041A\u0430\u043A\u043E\u0439-\u0442\u043E \u0441\u043F\u0435\u043B
-    \u21162"
+  _cardName: "\u0417\u0435\u043B\u044C\u0435 \u044F\u0440\u043E\u0441\u0442\u0438"
   _rarity: 2
   _elixirCost: 4
   _icon: {fileID: 1408329417, guid: 7e126557be315ce45bdd1fb511b3f5b7, type: 3}

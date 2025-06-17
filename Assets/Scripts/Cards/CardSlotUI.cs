@@ -26,12 +26,13 @@ public class CardSlotUI : MonoBehaviour
         _cardManaCost.text = card.ElexirCost.ToString();
         _manaCost = card.ElexirCost;
         _cardIcon.color = Color.white;
+        Debug.Log("добавлена карта:" +  _currentCard.name);
     }
 
 
-    public bool UseCard(Cell targetCell)
+    public void TryUseCard(Cell targetCell)
     {
-        if (!_manaSystem.TrySpendMana(_manaCost)) return false;
+        if (!_manaSystem.TrySpendMana(_manaCost)) return;
 
         Debug.Log($"Использована карта: {_currentCard.CardName}");
 
@@ -43,7 +44,5 @@ public class CardSlotUI : MonoBehaviour
         {
             Instantiate(_currentCard.SpellPrefab, targetCell.transform.position, Quaternion.identity);
         }
-
-        return true;
     }
 }

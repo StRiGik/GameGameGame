@@ -29,12 +29,12 @@ public class DeckManager : MonoBehaviour
         foreach (var card in shuffledCards)
         {
             _cardQueue.Enqueue(card);
+            Debug.Log("в очеердь добавлена карта: " + card.name);
         }
     }
 
     private Card[] ShuffleTheCards(Card[] deck)
     {
-        // Улучшенная перетасовка с созданием нового массива
         Card[] shuffled = (Card[])deck.Clone();
         for (int i = 0; i < shuffled.Length; i++)
         {

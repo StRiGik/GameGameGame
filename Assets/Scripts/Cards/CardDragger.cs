@@ -79,10 +79,10 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(eventData.position);
         Cell targetCell = _gridManager.GetNearestCell(worldPos);
 
-        if (targetCell != null && _slot.UseCard(targetCell) == true)
+        if (targetCell != null)
         {
-            _slot.UseCard(targetCell); // Передаем клетку, куда сбросили
-            _draggingObject.GetComponent<Image>().sprite = _slot.CardIcon.sprite;
+            _slot.TryUseCard(targetCell); // Передаем клетку, куда сбросили
+            _draggingObject.GetComponent<Image>().sprite = _slot.CardIcon.sprite; //Обновляем картинку
         }
     }
 
