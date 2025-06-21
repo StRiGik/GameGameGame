@@ -17,7 +17,11 @@ MonoBehaviour:
   _elixirCost: 4
   _icon: {fileID: 403626210, guid: ca077b4383fb2894190c2866d556b9c9, type: 3}
   _frame: {fileID: 21300000, guid: b07a413cf1cdc5448a812f090746bd5c, type: 3}
+  _damage: 0
+  _cardType: 0
   _spellPrefab: {fileID: 5694057280725928191, guid: 61020b07686d67940998e2eba90db82c, type: 3}
+  _radius: 2
+  _units: {fileID: 0}
   description: "\u043C\u0430\u043B\u0435\u043D\u044C\u043A\u0438\u0439 \u0448\u0430\u0440\u0438\u043A,
     \u043F\u043E\u0434\u0436\u0438\u0433\u0430\u044E\u0449\u0438\u0439 \u0432\u0441\u0435
     \u043D\u0430 \u0441\u0432\u043E\u0435\u043C \u043F\u0443\u0442\u0438."

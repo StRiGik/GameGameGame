@@ -14,10 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardName: "\u0421\u0432\u0438\u0442\u043E\u043A \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
   _rarity: 0
-  _elixirCost: 4
   _icon: {fileID: 1798365998, guid: ca077b4383fb2894190c2866d556b9c9, type: 3}
   _frame: {fileID: 21300000, guid: bd7bda01e2446c44789f3f2f5dd636bb, type: 3}
+  _cardType: 2
   _spellPrefab: {fileID: 5694057280725928191, guid: 61020b07686d67940998e2eba90db82c, type: 3}
+  _radius: 0
+  _targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _units: {fileID: 0}
+  _elixirCost: 4
+  _damage: 0
   description: "\u043C\u0430\u043B\u0435\u043D\u044C\u043A\u0438\u0439 \u0448\u0430\u0440\u0438\u043A,
     \u043F\u043E\u0434\u0436\u0438\u0433\u0430\u044E\u0449\u0438\u0439 \u0432\u0441\u0435
     \u043D\u0430 \u0441\u0432\u043E\u0435\u043C \u043F\u0443\u0442\u0438."

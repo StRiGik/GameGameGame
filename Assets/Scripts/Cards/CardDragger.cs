@@ -1,3 +1,5 @@
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,15 +8,20 @@ using UnityEngine.UI;
 public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     [Header("Settings")]
-    [SerializeField] private LayerMask _playableLayerMask; // Настройте в инспекторе
+    [SerializeField] private LayerMask _playableLayerMask;
+    [SerializeField] private LayerMask _essensLayerMask;
     [SerializeField] private float _dragScale = 1.2f; // Легкое увеличение при перетаскивании
     [SerializeField] private DeckManager _deck;
+    [SerializeField] private Material _material;
     private CardSlotUI _slot;
     private RectTransform _draggingObject;
     private Canvas _canvas;
     private bool _isDragging;
     private GridManager _gridManager;
-    
+    private GameObject _areaIndicator;
+
+
+
 
     private void Start()
     {
@@ -26,6 +33,16 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     }
 
     private void CreateDragObject()
+    {
+        if(_slot.Card.CardType == CardType.DirectedAction)
+            CareateDirectedActionTypeCardObject();
+        else if(_slot.Card.CardType == CardType.Area)
+            CreateAreaTypeCardObject();
+        else if(_slot.Card.CardType == CardType.Summoners)
+            CareateDirectedActionTypeCardObject();
+    }
+
+    private void CareateDirectedActionTypeCardObject()
     {
         // Создаем объект-копию карты
         GameObject dragObj = new GameObject("DraggedCard", typeof(Image), typeof(CanvasGroup));
@@ -48,16 +65,90 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         cg.alpha = 0.8f;
     }
 
+    private void CreateAreaTypeCardObject()
+    {
+        // Создаем объект-индикатор области
+        _areaIndicator = new GameObject("AreaIndicator");
+        _areaIndicator.transform.SetParent(_canvas.transform);
+        _areaIndicator.SetActive(false);
+
+        // Добавляем компоненты
+        var image = _areaIndicator.AddComponent<Image>();
+        image.raycastTarget = false;
+
+        // Настраиваем цвет и прозрачность
+        Color semiTransparentGray = new Color(0.5f, 0.5f, 0.5f, 0.4f); // Серый с прозрачностью 40%
+        image.color = semiTransparentGray;
+
+        // Создаем спрайт круга с нужным радиусом
+        int pixelRadius = Mathf.RoundToInt(_slot.Card.Radius * 100f); // Переводим радиус в пиксели
+        image.sprite = CreateCircleSprite(pixelRadius);
+
+        // Настраиваем RectTransform
+        _draggingObject = _areaIndicator.GetComponent<RectTransform>();
+        float diameterInUnits = _slot.Card.Radius * 2f; // Диаметр в игровых единицах
+        _draggingObject.sizeDelta = new Vector2(diameterInUnits, diameterInUnits);
+
+        // Добавляем CanvasGroup для управления прозрачностью
+        var canvasGroup = _areaIndicator.AddComponent<CanvasGroup>();
+        canvasGroup.alpha = 0.7f; // Дополнительная прозрачность
+    }
+
+    private Sprite CreateCircleSprite(int diameter)
+    {
+    Texture2D texture = new Texture2D(diameter, diameter, TextureFormat.RGBA32, false);
+    Color[] colors = new Color[diameter * diameter];
+    
+    Vector2 center = new Vector2(diameter / 2f, diameter / 2f);
+    float radius = diameter / 2f;
+    float feather = 5f; // Размер размытия краев
+
+    for (int y = 0; y < diameter; y++)
+    {
+        for (int x = 0; x < diameter; x++)
+        {
+            float distance = Vector2.Distance(new Vector2(x, y), center);
+            float alpha = Mathf.Clamp01((radius - distance) / feather);
+            colors[y * diameter + x] = new Color(1, 1, 1, alpha);
+        }
+    }
+
+    texture.SetPixels(colors);
+    texture.Apply();
+    return Sprite.Create(texture, new Rect(0, 0, diameter, diameter), Vector2.one * 0.5f, 100f);
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         _isDragging = true;
-        _draggingObject.gameObject.SetActive(true);
-        _draggingObject.position = _slot.CardIcon.transform.position;
+
+        switch (_slot.Card.CardType)
+        {
+            case CardType.Area:
+                _areaIndicator.SetActive(true);
+                _draggingObject.position = _slot.CardIcon.transform.position;
+                break;
+
+            case CardType.DirectedAction:
+                _draggingObject.gameObject.SetActive(true);
+                _draggingObject.position = _slot.CardIcon.transform.position;
+                break;
+
+            default:
+                _draggingObject.gameObject.SetActive(true);
+                _draggingObject.position = _slot.CardIcon.transform.position;
+                break;
+        }
+
         _slot.CardIcon.color = new Color(1, 1, 1, 0.3f);
+
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+       Vector2 worldPos = Camera.main.ScreenToWorldPoint(eventData.position);
+        
+
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             _draggingObject.parent as RectTransform,
             eventData.position,
@@ -65,6 +156,43 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
             out Vector2 localPoint);
 
         _draggingObject.localPosition = localPoint;
+
+        // Проверка объектов под курсором (только для DirectedAction)
+        if (_slot.Card.CardType == CardType.DirectedAction)
+        {
+            CheckObjectUnderCursor(worldPos);
+        }
+    }
+
+    private void CheckObjectUnderCursor(Vector2 worldPosition)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(
+            worldPosition,
+            Vector2.zero,
+            Mathf.Infinity,
+            _essensLayerMask);
+
+        // 2. Если попали в объект
+        if (hit.collider != null)
+        {
+            GameObject target = hit.collider.gameObject;
+            //LayerMask targetLayer = target.gameObject.layer;
+
+            Debug.Log(target);
+            //Debug.Log(targetLayer);
+            // 3. Проверяем, валидная ли это цель
+            int targetGameObjLayer = target.layer;
+            if((_slot.Card.TargetLayers & (1 << targetGameObjLayer)) != 0)
+            {
+                Debug.Log("цель найдена и покрашена");
+                SpriteRenderer spriteRender = target.GetComponentInChildren<SpriteRenderer>();
+                if(spriteRender != null)
+                {
+                    spriteRender.material = _material;
+                }
+            }
+        }
+            
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -82,7 +210,8 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         if (targetCell != null)
         {
             _slot.TryUseCard(targetCell); // Передаем клетку, куда сбросили
-            _draggingObject.GetComponent<Image>().sprite = _slot.CardIcon.sprite; //Обновляем картинку
+            Destroy(_draggingObject.gameObject);
+            CreateDragObject();
         }
     }
 

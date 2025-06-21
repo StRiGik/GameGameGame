@@ -113,12 +113,12 @@ TextureImporter:
       name: "\u0430\u0430\u0430\u0410\u0410\u0410\u043E\u043E\u043E\u041E\u041E\u0413\u041E_0"
       rect:
         serializedVersion: 2
-        x: 5
-        y: 6
-        width: 161
-        height: 185
+        x: 2
+        y: 2
+        width: 185
+        height: 195
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: "\u0430\u0430\u0430\u0410\u0410\u0410\u043E\u043E\u043E\u041E\u041E\u0413\u041E_1"
       rect:
         serializedVersion: 2
-        x: 295
-        y: 8
-        width: 169
-        height: 170
+        x: 289
+        y: 4
+        width: 175
+        height: 177
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

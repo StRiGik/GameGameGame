@@ -8,6 +8,7 @@ public class CardSlotUI : MonoBehaviour
     [SerializeField] private Image _cardIcon;
     [SerializeField] private Image _cardFrame;
     [SerializeField] private Text _cardManaCost;
+    [SerializeField] private CardType _cardType;    
 
     [Header("Системы")]
     [SerializeField] private ManaSystem _manaSystem;
@@ -17,7 +18,8 @@ public class CardSlotUI : MonoBehaviour
     private int _manaCost;
 
     public Image CardIcon => _cardIcon;
-
+    public CardType CardType => _cardType;
+    public Card Card => _currentCard;
     public void SetCard(Card card)
     {
         _currentCard = card;
