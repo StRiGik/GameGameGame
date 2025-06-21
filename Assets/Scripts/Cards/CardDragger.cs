@@ -182,30 +182,21 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         {
             if(!_selectedObjects.Contains(hit.collider.gameObject))
                 _selectedObjects.Add(hit.collider.gameObject);
-            GameObject target = hit.collider.gameObject;
-            //LayerMask targetLayer = target.gameObject.layer;
 
+            GameObject target = hit.collider.gameObject;
             Debug.Log(target);
-            //Debug.Log(targetLayer);
+
             // 3. ѕровер€ем, валидна€ ли это цель
             int targetGameObjLayer = target.layer;
             if((_slot.Card.TargetLayers & (1 << targetGameObjLayer)) != 0)
             {
                 Debug.Log("цель найдена и покрашена");
-                SpriteRenderer spriteRender = target.GetComponentInChildren<SpriteRenderer>();
-                if(spriteRender != null)
-                {
-                    spriteRender.material = _trueMaterial;
-                }
+                SetOutlineMaterial(target, _trueMaterial);
             }
             else
             {
                 Debug.Log(" арту нельз€ использовать на эту цель");
-                SpriteRenderer spriteRender = target.GetComponentInChildren<SpriteRenderer>();
-                if(spriteRender != null )
-                {
-                    spriteRender.material = _falseMaterial;
-                }
+                SetOutlineMaterial(target, _falseMaterial);
             }
         }
         else
@@ -213,6 +204,15 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
             ResetOutlineMaterial();
         }
 
+    }
+
+    private void SetOutlineMaterial(GameObject target, Material material)
+    {
+        SpriteRenderer spriteRender = target.GetComponentInChildren<SpriteRenderer>();
+        if (spriteRender != null)
+        {
+            spriteRender.material = material;
+        }
     }
 
     private void ResetOutlineMaterial()
