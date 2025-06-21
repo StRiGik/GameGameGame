@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,6 +12,7 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     [Header("Settings")]
     [SerializeField] private LayerMask _playableLayerMask;
     [SerializeField] private LayerMask _essensLayerMask;
+    [SerializeField] private RectTransform _deckArea;
     [SerializeField] private float _dragScale = 1.2f; // Легкое увеличение при перетаскивании
     [SerializeField] private DeckManager _deck;
     [SerializeField] private Material _trueMaterial;
@@ -237,19 +239,51 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         if (!_isDragging) return;
         _isDragging = false;
 
+        
         _slot.CardIcon.color = Color.white;
         _draggingObject.gameObject.SetActive(false);
 
-        // Проверяем сброс на клетку через GridManager
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(eventData.position);
-        Cell targetCell = _gridManager.GetNearestCell(worldPos);
-
-        if (targetCell != null)
+        if (IsOverDeckArea(eventData.position)) return;
+        // Проверяем сброс на клетку через GridManager
+        if (_slot.Card.CardType == CardType.Summoners)
         {
-            _slot.TryUseCard(targetCell); // Передаем клетку, куда сбросили
+            Cell targetCell = _gridManager.GetNearestCell(worldPos);
+            if (targetCell != null)
+            {
+                _slot.TryUseCard(targetCell); // Передаем клетку, куда сбросили
+                Destroy(_draggingObject.gameObject);
+                CreateDragObject();
+            }
+        }
+        else if (_slot.Card.CardType == CardType.DirectedAction)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero, Mathf.Infinity, _essensLayerMask);
+            if (hit.collider != null)
+            {
+                int targetLayer = hit.collider.gameObject.layer;
+                if ((_slot.Card.TargetLayers & (1 << targetLayer)) != 0)
+                {
+                    _slot.TryUseCard(null, hit.collider.gameObject);
+                    Destroy(_draggingObject.gameObject);
+                    CreateDragObject();
+                }
+            }
+        }
+        else if(_slot.Card.CardType == CardType.Area)
+        {
+            _slot.TryUseCard(null, null, transform);
             Destroy(_draggingObject.gameObject);
             CreateDragObject();
         }
+    }
+
+    private bool IsOverDeckArea(Vector2 screenPosition)
+    {
+        return RectTransformUtility.RectangleContainsScreenPoint(
+            _deckArea,
+            screenPosition,
+            _canvas.worldCamera);
     }
 
     private void OnDestroy()

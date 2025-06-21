@@ -24823,7 +24823,7 @@ GameObject:
   - component: {fileID: 240831265}
   m_Layer: 5
   m_Name: Card_Slot_2
-  m_TagString: slot
+  m_TagString: DeckArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24924,9 +24924,12 @@ MonoBehaviour:
   _essensLayerMask:
     serializedVersion: 2
     m_Bits: 192
+  _deckArea: {fileID: 651061120}
   _dragScale: 0.5
   _deck: {fileID: 1328658963}
-  _material: {fileID: 2100000, guid: 39f672ca6eeb7bd44bda5965afcc8e3e, type: 2}
+  _trueMaterial: {fileID: 2100000, guid: fc0768be69e5a3648b897dbcfc61f2fc, type: 2}
+  _falseMaterial: {fileID: 2100000, guid: 39f672ca6eeb7bd44bda5965afcc8e3e, type: 2}
+  _defoultMaterial: {fileID: 2100000, guid: 3d6f18877f7390d418bfe770e0914313, type: 2}
 --- !u!1 &267523433
 GameObject:
   m_ObjectHideFlags: 0
@@ -24991,7 +24994,7 @@ GameObject:
   - component: {fileID: 455522445}
   m_Layer: 5
   m_Name: Card_Slot_4
-  m_TagString: slot
+  m_TagString: DeckArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25092,9 +25095,12 @@ MonoBehaviour:
   _essensLayerMask:
     serializedVersion: 2
     m_Bits: 192
+  _deckArea: {fileID: 651061120}
   _dragScale: 0.5
   _deck: {fileID: 1328658963}
-  _material: {fileID: 2100000, guid: 39f672ca6eeb7bd44bda5965afcc8e3e, type: 2}
+  _trueMaterial: {fileID: 2100000, guid: fc0768be69e5a3648b897dbcfc61f2fc, type: 2}
+  _falseMaterial: {fileID: 2100000, guid: 39f672ca6eeb7bd44bda5965afcc8e3e, type: 2}
+  _defoultMaterial: {fileID: 2100000, guid: 3d6f18877f7390d418bfe770e0914313, type: 2}
 --- !u!1 &485753990
 GameObject:
   m_ObjectHideFlags: 0
@@ -25227,7 +25233,7 @@ GameObject:
   - component: {fileID: 490416888}
   m_Layer: 5
   m_Name: Slider
-  m_TagString: Untagged
+  m_TagString: DeckArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25434,7 +25440,7 @@ GameObject:
   - component: {fileID: 521269124}
   m_Layer: 5
   m_Name: Card_Slot_3
-  m_TagString: slot
+  m_TagString: DeckArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25535,9 +25541,12 @@ MonoBehaviour:
   _essensLayerMask:
     serializedVersion: 2
     m_Bits: 192
+  _deckArea: {fileID: 651061120}
   _dragScale: 0.5
   _deck: {fileID: 1328658963}
-  _material: {fileID: 2100000, guid: 39f672ca6eeb7bd44bda5965afcc8e3e, type: 2}
+  _trueMaterial: {fileID: 2100000, guid: fc0768be69e5a3648b897dbcfc61f2fc, type: 2}
+  _falseMaterial: {fileID: 2100000, guid: 39f672ca6eeb7bd44bda5965afcc8e3e, type: 2}
+  _defoultMaterial: {fileID: 2100000, guid: 3d6f18877f7390d418bfe770e0914313, type: 2}
 --- !u!1 &615347047
 GameObject:
   m_ObjectHideFlags: 0
@@ -25622,9 +25631,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 651061120}
+  - component: {fileID: 651061122}
+  - component: {fileID: 651061121}
   m_Layer: 5
   m_Name: CardSystemUI
-  m_TagString: Untagged
+  m_TagString: DeckArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25651,6 +25662,44 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 150}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &651061121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651061119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.4339623, g: 0.42528072, b: 0.40257505, a: 0.2627451}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &651061122
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651061119}
+  m_CullTransparentMesh: 1
 --- !u!1 &686934840
 GameObject:
   m_ObjectHideFlags: 0
@@ -25839,7 +25888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -74.000015, y: 190}
+  m_AnchoredPosition: {x: -74.00003, y: 190}
   m_SizeDelta: {x: 160, y: 110.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &935287163
@@ -25897,7 +25946,7 @@ GameObject:
   - component: {fileID: 1032809319}
   m_Layer: 5
   m_Name: nextCardSlot
-  m_TagString: Untagged
+  m_TagString: DeckArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31040,7 +31089,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -74.000015, y: 100}
+  m_AnchoredPosition: {x: -74.00003, y: 100}
   m_SizeDelta: {x: 80, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1424033728
@@ -31470,7 +31519,7 @@ GameObject:
   - component: {fileID: 1662352023}
   m_Layer: 5
   m_Name: Card_Slot_1
-  m_TagString: slot
+  m_TagString: DeckArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31571,9 +31620,12 @@ MonoBehaviour:
   _essensLayerMask:
     serializedVersion: 2
     m_Bits: 192
+  _deckArea: {fileID: 651061120}
   _dragScale: 0.5
   _deck: {fileID: 1328658963}
-  _material: {fileID: 2100000, guid: 39f672ca6eeb7bd44bda5965afcc8e3e, type: 2}
+  _trueMaterial: {fileID: 2100000, guid: fc0768be69e5a3648b897dbcfc61f2fc, type: 2}
+  _falseMaterial: {fileID: 2100000, guid: 39f672ca6eeb7bd44bda5965afcc8e3e, type: 2}
+  _defoultMaterial: {fileID: 2100000, guid: 3d6f18877f7390d418bfe770e0914313, type: 2}
 --- !u!1 &1710133453
 GameObject:
   m_ObjectHideFlags: 0
@@ -31667,7 +31719,7 @@ GameObject:
   - component: {fileID: 1793382524}
   m_Layer: 5
   m_Name: CardPanel
-  m_TagString: Untagged
+  m_TagString: DeckArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

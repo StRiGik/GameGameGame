@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - slot
+  - DeckArea
   layers:
   - Default
   - TransparentFX

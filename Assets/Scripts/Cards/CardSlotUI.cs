@@ -32,7 +32,7 @@ public class CardSlotUI : MonoBehaviour
     }
 
 
-    public void TryUseCard(Cell targetCell)
+    public void TryUseCard(Cell targetCell = null, GameObject targetObj = null, Transform targetArea = null)
     {
         if (!_manaSystem.TrySpendMana(_manaCost)) return;
 
@@ -46,5 +46,17 @@ public class CardSlotUI : MonoBehaviour
         {
             Instantiate(_currentCard.SpellPrefab, targetCell.transform.position, Quaternion.identity);
         }
+        else if(targetObj != null)
+        {
+            Debug.Log("Карта применена на объект: " + targetObj.name);
+        }
+        else if(targetArea != null)
+        {
+            Vector3 spellPos = targetArea.position;
+            spellPos.z = 0;
+            Instantiate(_currentCard.SpellPrefab, spellPos, Quaternion.identity);
+            Debug.Log("карта применена на область" + spellPos);
+        }
+
     }
 }
