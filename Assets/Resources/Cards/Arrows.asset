@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardName: "\u0421\u0442\u0440\u0435\u043B\u044B"
   _rarity: 0
-  _elixirCost: 3
   _icon: {fileID: 2013833117, guid: 64a17ef0943d1d047aea7e49d16dfdd8, type: 3}
   _frame: {fileID: 21300000, guid: bd7bda01e2446c44789f3f2f5dd636bb, type: 3}
-  _damage: 0
   _cardType: 0
-  _spellPrefab: {fileID: 5694057280725928191, guid: 61020b07686d67940998e2eba90db82c, type: 3}
+  _spellPrefab: {fileID: 6261124835970649907, guid: 2053ebbc58e503b46b9277feaae5f94a, type: 3}
   _radius: 3
+  _targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   _units: {fileID: 0}
+  _elixirCost: 3
+  _damage: 10
   description: "\u0432\u0436\u0443\u0445, \u043D\u0430\u043A\u0440\u044B\u043B\u043E.."

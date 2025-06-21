@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class CharacterFSM : MonoBehaviour
 {
-    public enum PlayerState { Idle, Moving, Attacking }
+    public enum PlayerState { Idle, Moving, Attacking, TakeHit }
     public PlayerState CurrentState { get; private set; } = PlayerState.Idle;
     //Флаг принудительной атаки
     private bool _forceAttacking = false;
+
 
     public void OnMovementStarted()
     {
@@ -27,12 +28,18 @@ public class CharacterFSM : MonoBehaviour
             TryChangeState(PlayerState.Idle);
     }
 
+    public void SetTakeHitState()
+    {
+        TryChangeState(PlayerState.TakeHit);
+        TryChangeState(PlayerState.Idle);
+    }
+
     public event Action<PlayerState> OnStateChanged;
 
     private void TryChangeState(PlayerState newState)
     {
-        if (CurrentState == newState && newState != PlayerState.Attacking) return;
-        if (_forceAttacking && newState != PlayerState.Attacking) return;
+        if (CurrentState == newState && newState != PlayerState.Attacking || newState == PlayerState.TakeHit) return;
+        if (_forceAttacking && newState != PlayerState.TakeHit) return;
         //Проверяем, можно ли перейти в новое состояние
         if (CanChangeState(newState))
         {
@@ -46,7 +53,7 @@ public class CharacterFSM : MonoBehaviour
 
     private bool CanChangeState(PlayerState newState)
     {
- 
+        if (newState == PlayerState.TakeHit) return true;
         if(newState == PlayerState.Idle && CurrentState == PlayerState.Attacking) { return false; }
         
         return true;

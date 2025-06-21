@@ -272,7 +272,7 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         }
         else if(_slot.Card.CardType == CardType.Area)
         {
-            _slot.TryUseCard(null, null, transform);
+            _slot.TryUseCard(null, null, worldPos);
             Destroy(_draggingObject.gameObject);
             CreateDragObject();
         }

@@ -32,14 +32,13 @@ public class CardSlotUI : MonoBehaviour
     }
 
 
-    public void TryUseCard(Cell targetCell = null, GameObject targetObj = null, Transform targetArea = null)
+    public void TryUseCard(Cell targetCell = null, GameObject targetObj = null, Vector3 targetArea = default)
     {
         if (!_manaSystem.TrySpendMana(_manaCost)) return;
 
         Debug.Log($"Использована карта: {_currentCard.CardName}");
 
-        // Уведомляем DeckManager
-        _deckManager.OnCardUsed(this);
+
 
         // Здесь можно добавить эффекты применения карты
         if (targetCell != null && _currentCard.SpellPrefab != null)
@@ -52,11 +51,14 @@ public class CardSlotUI : MonoBehaviour
         }
         else if(targetArea != null)
         {
-            Vector3 spellPos = targetArea.position;
+            Vector3 spellPos = targetArea;
             spellPos.z = 0;
             Instantiate(_currentCard.SpellPrefab, spellPos, Quaternion.identity);
             Debug.Log("карта применена на область" + spellPos);
         }
+
+                // Уведомляем DeckManager
+        _deckManager.OnCardUsed(this);
 
     }
 }

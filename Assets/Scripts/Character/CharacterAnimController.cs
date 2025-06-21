@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterAnimController : MonoBehaviour
@@ -10,6 +11,7 @@ public class CharacterAnimController : MonoBehaviour
     [SerializeField] private string _idleParam = "Idle";
     [SerializeField] private string _moveParam = "Moving";
     [SerializeField] private string _attackParam = "Attack";
+    [SerializeField] private string _takeHit = "TakeHit";
 
     private void Awake()
     {
@@ -40,7 +42,9 @@ public class CharacterAnimController : MonoBehaviour
             case CharacterFSM.PlayerState.Attacking:
                 _anim.SetTrigger(_attackParam);
                 break;
-
+            case CharacterFSM.PlayerState.TakeHit:
+                _anim.SetTrigger(_takeHit);
+                break;
 
         }
     }

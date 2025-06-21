@@ -52,7 +52,7 @@ public class CharacterAttack : MonoBehaviour
         if (closestEnemy != null)
         {
             _fsm.SetAttackState(enemys.Length > 0);
-            closestEnemy.GetComponent<Health>().SetHealth(-_damage);
+            closestEnemy.GetComponent<Health>().TakeHeal(-_damage);
             _lastAttackTime = Time.time;
         }
 
