@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,13 +13,17 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     [SerializeField] private LayerMask _essensLayerMask;
     [SerializeField] private float _dragScale = 1.2f; // Легкое увеличение при перетаскивании
     [SerializeField] private DeckManager _deck;
-    [SerializeField] private Material _material;
+    [SerializeField] private Material _trueMaterial;
+    [SerializeField] private Material _falseMaterial;
+    [SerializeField] private Material _defoultMaterial;
     private CardSlotUI _slot;
     private RectTransform _draggingObject;
     private Canvas _canvas;
     private bool _isDragging;
     private GridManager _gridManager;
     private GameObject _areaIndicator;
+
+    private List<GameObject> _selectedObjects = new List<GameObject>();
 
 
 
@@ -28,7 +33,7 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         _slot = GetComponent<CardSlotUI>();
         _gridManager = FindObjectOfType<GridManager>();
         _canvas = GetComponentInParent<Canvas>();
-
+        _selectedObjects = new List<GameObject>();
         CreateDragObject();
     }
 
@@ -175,6 +180,8 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         // 2. Если попали в объект
         if (hit.collider != null)
         {
+            if(!_selectedObjects.Contains(hit.collider.gameObject))
+                _selectedObjects.Add(hit.collider.gameObject);
             GameObject target = hit.collider.gameObject;
             //LayerMask targetLayer = target.gameObject.layer;
 
@@ -188,9 +195,33 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
                 SpriteRenderer spriteRender = target.GetComponentInChildren<SpriteRenderer>();
                 if(spriteRender != null)
                 {
-                    spriteRender.material = _material;
+                    spriteRender.material = _trueMaterial;
                 }
             }
+            else
+            {
+                Debug.Log("Карту нельзя использовать на эту цель");
+                SpriteRenderer spriteRender = target.GetComponentInChildren<SpriteRenderer>();
+                if(spriteRender != null )
+                {
+                    spriteRender.material = _falseMaterial;
+                }
+            }
+        }
+        else
+        {
+            foreach (GameObject target in _selectedObjects)
+            {
+                if(target != null)
+                {
+                    SpriteRenderer spriteRender = target.GetComponentInChildren<SpriteRenderer>();
+                    if (spriteRender != null)
+                    {
+                        spriteRender.material = _defoultMaterial;
+                    }
+                }
+            }
+            _selectedObjects.Clear();
         }
             
     }
