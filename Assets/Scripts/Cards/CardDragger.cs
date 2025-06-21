@@ -210,24 +210,30 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         }
         else
         {
-            foreach (GameObject target in _selectedObjects)
+            ResetOutlineMaterial();
+        }
+
+    }
+
+    private void ResetOutlineMaterial()
+    {
+        foreach (GameObject target in _selectedObjects)
+        {
+            if (target != null)
             {
-                if(target != null)
+                SpriteRenderer spriteRender = target.GetComponentInChildren<SpriteRenderer>();
+                if (spriteRender != null)
                 {
-                    SpriteRenderer spriteRender = target.GetComponentInChildren<SpriteRenderer>();
-                    if (spriteRender != null)
-                    {
-                        spriteRender.material = _defoultMaterial;
-                    }
+                    spriteRender.material = _defoultMaterial;
                 }
             }
-            _selectedObjects.Clear();
         }
-            
+        _selectedObjects.Clear();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        ResetOutlineMaterial();
         if (!_isDragging) return;
         _isDragging = false;
 
