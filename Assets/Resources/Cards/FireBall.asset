@@ -17,7 +17,7 @@ MonoBehaviour:
   _icon: {fileID: 403626210, guid: ca077b4383fb2894190c2866d556b9c9, type: 3}
   _frame: {fileID: 21300000, guid: b07a413cf1cdc5448a812f090746bd5c, type: 3}
   _cardType: 0
-  _spellPrefab: {fileID: 6261124835970649907, guid: 2053ebbc58e503b46b9277feaae5f94a, type: 3}
+  _spellPrefab: {fileID: 614143012583295637, guid: 1448979b8ca767741bf0e53d704be74b, type: 3}
   _radius: 2
   _targetLayerMask:
     serializedVersion: 2

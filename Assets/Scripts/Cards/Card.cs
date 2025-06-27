@@ -12,13 +12,12 @@ public class Card : ScriptableObject
 
     [Header("Особые настройки")]
     [SerializeField] private CardType _cardType;    // Тип карты
-    [SerializeField] private GameObject _spellPrefab; // Префаб способности
-    [SerializeField] private float _radius;         // Радиус действия для карт по области
-    [SerializeField] private LayerMask _targetLayerMask; // Сущности, на которые распространяется действие карты
-    [SerializeField] private GameObject _units;     // Префабы юнитов для карт призыва
+    [SerializeField] private GameObject _spellPrefab = null; // Префаб способности
+    [SerializeField] private float _radius = 0;         // Радиус действия для карт по области
+    [SerializeField] private LayerMask _targetLayerMask; // Слои, на которые распространяется действие карты
     
-    [SerializeField] private int _elixirCost;      // Стоимость элексира (как в CR)
-    [SerializeField] private float _damage;         // Урон    
+    [SerializeField] private int _elixirCost = 0;      // Стоимость элексира (как в CR)
+    [SerializeField] private float _damage = 0;         // Урон    
 
 
     [Header("Описание карты")]
@@ -36,7 +35,6 @@ public class Card : ScriptableObject
     public GameObject SpellPrefab => _spellPrefab;
     public float Radius => _radius;
     public LayerMask TargetLayers => _targetLayerMask;
-    public GameObject Unit => _units;
 }
 
 public enum CardRarity

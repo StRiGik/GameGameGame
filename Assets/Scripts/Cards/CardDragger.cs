@@ -14,15 +14,14 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     [SerializeField] private LayerMask _essensLayerMask;
     [SerializeField] private RectTransform _deckArea;
     [SerializeField] private float _dragScale = 1.2f; // Легкое увеличение при перетаскивании
-    [SerializeField] private DeckManager _deck;
     [SerializeField] private Material _trueMaterial;
     [SerializeField] private Material _falseMaterial;
     [SerializeField] private Material _defoultMaterial;
+    [SerializeField] private CardManager _cardManager;
     private CardSlotUI _slot;
     private RectTransform _draggingObject;
     private Canvas _canvas;
     private bool _isDragging;
-    private GridManager _gridManager;
     private GameObject _areaIndicator;
 
     private List<GameObject> _selectedObjects = new List<GameObject>();
@@ -33,7 +32,6 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     private void Start()
     {
         _slot = GetComponent<CardSlotUI>();
-        _gridManager = FindObjectOfType<GridManager>();
         _canvas = GetComponentInParent<Canvas>();
         _selectedObjects = new List<GameObject>();
         CreateDragObject();
@@ -244,38 +242,34 @@ public class CardDragger : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         _draggingObject.gameObject.SetActive(false);
 
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(eventData.position);
+
         if (IsOverDeckArea(eventData.position)) return;
-        // Проверяем сброс на клетку через GridManager
-        if (_slot.Card.CardType == CardType.Summoners)
+
+        switch (_slot.Card.CardType)
         {
-            Cell targetCell = _gridManager.GetNearestCell(worldPos);
-            if (targetCell != null)
-            {
-                _slot.TryUseCard(targetCell); // Передаем клетку, куда сбросили
-                Destroy(_draggingObject.gameObject);
-                CreateDragObject();
-            }
-        }
-        else if (_slot.Card.CardType == CardType.DirectedAction)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero, Mathf.Infinity, _essensLayerMask);
-            if (hit.collider != null)
-            {
-                int targetLayer = hit.collider.gameObject.layer;
-                if ((_slot.Card.TargetLayers & (1 << targetLayer)) != 0)
+            case CardType.Area:
+                _cardManager.TryUseCard(_slot.Card, _slot, worldPos);
+                break;
+
+            case CardType.Summoners:
+                _cardManager.TryUseCard(_slot.Card, _slot, worldPos);
+                break;
+
+            case CardType.DirectedAction:
+                RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero, Mathf.Infinity, _essensLayerMask);
+                if (hit.collider != null)
                 {
-                    _slot.TryUseCard(null, hit.collider.gameObject);
-                    Destroy(_draggingObject.gameObject);
-                    CreateDragObject();
+                    int targetLayer = hit.collider.gameObject.layer;
+                    if ((_slot.Card.TargetLayers & (1 << targetLayer)) != 0)
+                    {
+                        _cardManager.TryUseCard(_slot.Card, _slot, hit.collider.gameObject);
+
+                    }
                 }
-            }
+                break;
         }
-        else if(_slot.Card.CardType == CardType.Area)
-        {
-            _slot.TryUseCard(null, null, worldPos);
-            Destroy(_draggingObject.gameObject);
-            CreateDragObject();
-        }
+        Destroy(_draggingObject.gameObject);
+        CreateDragObject();
     }
 
     private bool IsOverDeckArea(Vector2 screenPosition)

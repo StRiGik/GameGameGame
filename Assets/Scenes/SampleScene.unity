@@ -683,14 +683,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 74861469}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -701,7 +701,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &74861472
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24711,14 +24711,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115228783}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -24729,7 +24729,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &115228786
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -25040,9 +25040,6 @@ MonoBehaviour:
   _cardIcon: {fileID: 1899955064}
   _cardFrame: {fileID: 1640325179}
   _cardManaCost: {fileID: 1070204748}
-  _cardType: 0
-  _manaSystem: {fileID: 22744632}
-  _deckManager: {fileID: 1328658963}
 --- !u!114 &240831265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25063,10 +25060,10 @@ MonoBehaviour:
     m_Bits: 192
   _deckArea: {fileID: 651061120}
   _dragScale: 0.5
-  _deck: {fileID: 1328658963}
   _trueMaterial: {fileID: 2100000, guid: fc0768be69e5a3648b897dbcfc61f2fc, type: 2}
   _falseMaterial: {fileID: 2100000, guid: 39f672ca6eeb7bd44bda5965afcc8e3e, type: 2}
   _defoultMaterial: {fileID: 2100000, guid: 3d6f18877f7390d418bfe770e0914313, type: 2}
+  _cardManager: {fileID: 1785660529}
 --- !u!1 &267523433
 GameObject:
   m_ObjectHideFlags: 0
@@ -25211,9 +25208,6 @@ MonoBehaviour:
   _cardIcon: {fileID: 1492341755}
   _cardFrame: {fileID: 1853915050}
   _cardManaCost: {fileID: 869847403}
-  _cardType: 0
-  _manaSystem: {fileID: 22744632}
-  _deckManager: {fileID: 1328658963}
 --- !u!114 &455522445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25234,10 +25228,10 @@ MonoBehaviour:
     m_Bits: 192
   _deckArea: {fileID: 651061120}
   _dragScale: 0.5
-  _deck: {fileID: 1328658963}
   _trueMaterial: {fileID: 2100000, guid: fc0768be69e5a3648b897dbcfc61f2fc, type: 2}
   _falseMaterial: {fileID: 2100000, guid: 39f672ca6eeb7bd44bda5965afcc8e3e, type: 2}
   _defoultMaterial: {fileID: 2100000, guid: 3d6f18877f7390d418bfe770e0914313, type: 2}
+  _cardManager: {fileID: 1785660529}
 --- !u!1 &485753990
 GameObject:
   m_ObjectHideFlags: 0
@@ -25657,9 +25651,6 @@ MonoBehaviour:
   _cardIcon: {fileID: 615347049}
   _cardFrame: {fileID: 182549892}
   _cardManaCost: {fileID: 194236121}
-  _cardType: 0
-  _manaSystem: {fileID: 22744632}
-  _deckManager: {fileID: 1328658963}
 --- !u!114 &521269124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25680,10 +25671,10 @@ MonoBehaviour:
     m_Bits: 192
   _deckArea: {fileID: 651061120}
   _dragScale: 0.5
-  _deck: {fileID: 1328658963}
   _trueMaterial: {fileID: 2100000, guid: fc0768be69e5a3648b897dbcfc61f2fc, type: 2}
   _falseMaterial: {fileID: 2100000, guid: 39f672ca6eeb7bd44bda5965afcc8e3e, type: 2}
   _defoultMaterial: {fileID: 2100000, guid: 3d6f18877f7390d418bfe770e0914313, type: 2}
+  _cardManager: {fileID: 1785660529}
 --- !u!1 &607579315
 GameObject:
   m_ObjectHideFlags: 0
@@ -27080,14 +27071,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293757173}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -27098,7 +27089,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1293757176
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -31708,14 +31699,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1556057083}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -31726,7 +31717,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1556057086
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -32146,9 +32137,6 @@ MonoBehaviour:
   _cardIcon: {fileID: 1122511177}
   _cardFrame: {fileID: 2061896278}
   _cardManaCost: {fileID: 1710133455}
-  _cardType: 0
-  _manaSystem: {fileID: 22744632}
-  _deckManager: {fileID: 1328658963}
 --- !u!114 &1662352023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32169,10 +32157,10 @@ MonoBehaviour:
     m_Bits: 192
   _deckArea: {fileID: 651061120}
   _dragScale: 0.5
-  _deck: {fileID: 1328658963}
   _trueMaterial: {fileID: 2100000, guid: fc0768be69e5a3648b897dbcfc61f2fc, type: 2}
   _falseMaterial: {fileID: 2100000, guid: 39f672ca6eeb7bd44bda5965afcc8e3e, type: 2}
   _defoultMaterial: {fileID: 2100000, guid: 3d6f18877f7390d418bfe770e0914313, type: 2}
+  _cardManager: {fileID: 1785660529}
 --- !u!1 &1710133453
 GameObject:
   m_ObjectHideFlags: 0
@@ -32252,6 +32240,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1710133453}
   m_CullTransparentMesh: 1
+--- !u!1 &1785660528
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1785660530}
+  - component: {fileID: 1785660529}
+  m_Layer: 0
+  m_Name: CardManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1785660529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785660528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e4b90cb3afadf4897086526cadace7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deckManager: {fileID: 1328658963}
+  _manaSystem: {fileID: 22744632}
+  _gridManager: {fileID: 267523434}
+--- !u!4 &1785660530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785660528}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.195093, y: 1.1302058, z: -0.015212498}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1793382520
 GameObject:
   m_ObjectHideFlags: 0
@@ -32976,3 +33011,4 @@ SceneRoots:
   - {fileID: 1178768215}
   - {fileID: 267523435}
   - {fileID: 1328658964}
+  - {fileID: 1785660530}
